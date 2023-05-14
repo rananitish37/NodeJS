@@ -1,10 +1,14 @@
 const http=require('http');
 const fs=require('fs');
+const _ = require('lodash');
 
 const server=http.createServer((req,res)=>{
     console.log('request has beem made from browser to server');
     // console.log(req.method);
     console.log(req.url);
+
+    let num =_.random(0,20);
+    console.log(num);
 
     res.setHeader('Content-Type','text/html');
 //     res.write('<h1>hello world! :)</h1>');
@@ -15,12 +19,15 @@ const server=http.createServer((req,res)=>{
     switch(req.url){
         case '/':
             path+='/index.html';
+            res.statusCode=200;
             break;
         case '/about':
             path+='/about.html';
+            res.statusCode=200;
             break;
         default:
             path+='/404.html';
+            res.statusCode=404;
             break;
     };
 
